@@ -1,0 +1,49 @@
+.two-up-container {
+  --split-point: 0px;
+}
+
+.two-up-container > * {
+  grid-area: 1 / 1;
+  --accent-color: black;
+  --track-color: var(--accent-color);
+  --thumb-background: #fff;
+  --thumb-color: var(--accent-color);
+  --thumb-size: 48px;
+  --bar-size: 6px;
+  --bar-touch-size: 15px;
+}
+
+.two-up-handle {
+  touch-action: none;
+  position: relative;
+  width: var(--bar-touch-size);
+  transform: translateX(var(--split-point)) translateX(-50%);
+  will-change: transform;
+  cursor: ew-resize;
+  z-index: 20;
+  background-color: black;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+.scrubber {
+  display: flex;
+  width: var(--thumb-size);
+  height: calc(var(--thumb-size) * 0.9);
+  background: var(--thumb-background);
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: var(--thumb-size);
+  color: var(--thumb-color);
+  padding: 0 calc(var(--thumb-size) * 0.24);
+}
+
+.two-up-container > :nth-child(1):not(.two-up-handle) {
+  -webkit-clip-path: inset(0 calc(100% - var(--split-point)) 0 0);
+  clip-path: inset(0 calc(100% - var(--split-point)) 0 0);
+}
+
+.two-up-container > :nth-child(2):not(.two-up-handle) {
+  -webkit-clip-path: inset(0 0 0 var(--split-point));
+  clip-path: inset(0 0 0 var(--split-point));
+}
