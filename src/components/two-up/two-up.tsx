@@ -1,4 +1,4 @@
-import { clamp } from '../utils/math'
+import { clamp } from '../../utils/math'
 import './two-up.css'
 import { useEffect, useRef } from 'react'
 
