@@ -34,7 +34,7 @@ export function TwoUp ({ firstChild, secondChild }: Props) {
   }, [containerRef, handleRef])
 
   return (
-    <div ref={containerRef} className='relative grid two-up-container'>
+    <div ref={containerRef} className='two-up-container'>
       <div className='two-up-child'>{firstChild}</div>
       <div className='two-up-child'>{secondChild}</div>
       <div ref={handleRef} className='two-up-handle'>

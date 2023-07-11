@@ -8,8 +8,8 @@ function App () {
       </header>
       <section className='h-full grid place-content-center'>
         <TwoUp
-          firstChild={<img src='https://i.pinimg.com/564x/9d/87/4f/9d874f5d7fa7db611e61d993157cdfea.jpg' />}
-          secondChild={<img src='https://o.remove.bg/downloads/9c06f09e-b8b6-4baf-9e7f-0840a9d5ca4e/9d874f5d7fa7db611e61d993157cdfea-removebg-preview.png' />}
+          firstChild={<img src='/dog.jpg' />}
+          secondChild={<img src='/dog-removed.png' />}
         />
       </section>
     </main>

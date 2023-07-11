@@ -1,5 +1,7 @@
 .two-up-container {
   --split-point: 0px;
+  display: grid;
+  position: relative;
 }
 
 .two-up-container > * {
@@ -9,7 +11,6 @@
   --thumb-background: #fff;
   --thumb-color: var(--accent-color);
   --thumb-size: 48px;
-  --bar-size: 6px;
   --bar-touch-size: 15px;
 }
 
@@ -32,7 +33,6 @@
   width: var(--thumb-size);
   height: calc(var(--thumb-size) * 0.9);
   background: var(--thumb-background);
-  border: 1px solid rgba(0,0,0,0.2);
   border-radius: var(--thumb-size);
   color: var(--thumb-color);
   padding: 0 calc(var(--thumb-size) * 0.24);
