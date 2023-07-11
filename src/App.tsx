@@ -28,21 +28,18 @@ function App () {
 
   function handleFileChange (file: File): void {
     setLoading(true)
-    console.log(removeBgConfig)
     removeBackground(file, removeBgConfig)
       .then(async res => {
-        console.log('removed bg')
         return await Promise.all([
           fileAsUrl(file),
           fileAsUrl(res)
         ])
       })
       .then(([fileUrl, removedBgUrl]) => {
-        console.log('got urls')
         setFilePath(fileUrl)
         setRemovedBgPath(removedBgUrl)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log('error removing', err))
       .finally(() => setLoading(false))
   }
 

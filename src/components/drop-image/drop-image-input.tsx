@@ -52,6 +52,7 @@ export function DropImageInput ({
     const [file] = evt.dataTransfer.files
     if (file != null) {
       setFile(file)
+      handleChange(file)
     }
   }
 
@@ -72,11 +73,7 @@ export function DropImageInput ({
         <>
           <h4 className='text-xl'>{title}</h4>
           <small className='mb-5 '>{description}</small>
-          <div
-            className='px-10 py-8 rounded-md overflow-hidden bg-zinc-900 class flex flex-col justify-center items-center gap-4 relative'
-          >
-            <DraggableArea onDrop={handleDrop} />
-          </div>
+          <DraggableArea onDrop={handleDrop} />
           <span>Or</span>
           <label htmlFor='file-input' className='bg-zinc-700 rounded-lg px-5 py-2 cursor-pointer hover:bg-zinc-600 transition-colors'>
             {inputLabel}
