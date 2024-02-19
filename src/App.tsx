@@ -84,10 +84,19 @@ function App () {
             </div>
           }
           ImagePreview={
-            <TwoUp
-              firstChild={<img src={filePath ?? ''} />}
-              secondChild={<img src={removedBgPath ?? ''} />}
-            />
+            <>
+              <TwoUp
+                firstChild={<img src={filePath ?? ''} />}
+                secondChild={<img src={removedBgPath ?? ''} />}
+              />
+              <a
+                href={removedBgPath!}
+                download='removed-background.png'
+                className='p-2 bg-gray-700 rounded hover:text-blue-400 transition-colors'
+              >
+                Download Image
+              </a>
+            </>
           }
         />
       </section>
