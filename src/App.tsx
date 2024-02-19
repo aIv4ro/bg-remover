@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { DropImageInput } from './components/drop-image/drop-image-input'
 import { TwoUp } from './components/two-up/two-up'
 import removeBackground, { type Config } from '@imgly/background-removal'
@@ -12,19 +12,31 @@ const fileAsUrl = async (file: File | Blob): Promise<string> => {
   })
 }
 
+const progressTypes = {
+  fetch: 'Downloading',
+  compute: 'Processing'
+}
+
+const progressSubtypes = {
+  inference: 'image'
+}
+
 function App () {
   const [filePath, setFilePath] = useState<string | null>(null)
   const [removedBgPath, setRemovedBgPath] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [model, setModel] = useState<'small' | 'medium'>('small')
-  const removeBgConfig: Config = useMemo(() => {
-    return {
-      model,
-      progress: (key: string, current: number, total: number) => {
-        console.log(`Progress ${key}: ${current}/${total}`)
-      }
+  const [progress, setProgress] = useState<string | null>(null)
+
+  const removeBgConfig: Config = {
+    model,
+    progress: (key: string, current: number, total: number) => {
+      const [type, subtype] = key.split(':')
+      const formattedType = progressTypes[type as keyof typeof progressTypes] ?? type
+      const formattedSubtype = progressSubtypes[subtype as keyof typeof progressSubtypes] ?? subtype
+      setProgress(`${formattedType} ${formattedSubtype}: ${((current / total) * 100).toFixed(0)}%`)
     }
-  }, [model])
+  }
 
   function handleFileChange (file: File): void {
     setLoading(true)
@@ -40,7 +52,10 @@ function App () {
         setRemovedBgPath(removedBgUrl)
       })
       .catch(err => console.log('error removing', err))
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+        setProgress(null)
+      })
   }
 
   return (
@@ -65,6 +80,7 @@ function App () {
             <div className='flex flex-col items-center justify-center gap-2'>
               <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900' />
               <h4 className='text-xl'>Loading...</h4>
+              {progress != null && <p className='text-sm text-gray-400 max-w-[50ch'>{progress}</p>}
             </div>
           }
           ImagePreview={
